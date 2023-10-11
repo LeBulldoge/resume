@@ -87,7 +87,7 @@
 #par(justify: true)[
 - Managed and configured the company website to help provide file hosting and content distribution.
 - Provided technical support to employees ranging from OS problems to hardware support.
-- Installed and built company hardware such as computers and printers that were distributed to employees.
+- Installed and built company hardware such as computers and printers, distributed to employees.
 ]
 
 #let project(repo, body) = {
