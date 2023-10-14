@@ -12,14 +12,18 @@
     #link("http://github.com/LeBulldoge/resume")[
       #box[#image("assets/github-142.svg", width: 6pt)]_github!_
     ]
-  ]
+  ],
+  fill: rgb("fbfdf9")
 )
 
-#set text(font: "Times New Roman", size: 12pt)
+#set text(font: "Times New Roman", size: 12pt, fill: rgb("191c1b"))
 #set par(linebreaks: "optimized")
 
+#let surface_1 = rgb("#dbe5df")
+#let on_surface_text = rgb("#404944")
+
 #let sub_heading(body) = {
-  set text(18pt)
+  set text(16pt)
   set align(center)
   heading(level: 2)[
     #body
@@ -27,17 +31,19 @@
 }
 
 #let cell(icon, body) = {
-  set text(10pt)
+  set text(10pt, fill: on_surface_text)
   set align(center)
   rect(
     inset: 6pt,
-    fill: rgb("e4e5ea"),
+    fill: surface_1,
     width: 100%,
     radius: 6pt,
-    [
-      #box[#image("assets/" + icon, width: 8pt, fit: "contain")]
-      #text[#body]
-    ]
+    stack(
+      dir: ltr,
+      spacing: 5%,
+      image("assets/" + icon, width: 8pt),
+      text[#body]
+    )
   )
 }
 
@@ -69,7 +75,7 @@
     ]
   ]
 )
-#line(length: 100%, stroke: (paint: olive, thickness: 1pt, cap: "round"))
+#line(length: 100%, stroke: (paint: rgb("#bfc9c3"), thickness: 1pt, cap: "round"))
 
 #sub_heading[Experience]
 === Software Engineer
@@ -101,30 +107,38 @@
   ]]
 }
 
+#let card(title, body) = {
+  set text(fill: on_surface_text)
+  rect(
+    inset: 8pt,
+    fill: surface_1,
+    width: 100%,
+    height: 100%,
+    radius: 6pt,
+  stack(
+    spacing: 5pt,
+    title,
+    line(length: 100%, stroke: (paint: rgb("#bfc9c3"), thickness: 1pt, cap: "round")),
+    text(11pt, body),
+  ))
+}
+
 #sub_heading[Projects]
 #par(justify: true)[
 #grid(
   columns: (1fr, 1fr),
-  rows: 2,
-  gutter: 10pt,
-  [
-    #project("N-Body-simulation")[OpenGL N-Body Problem Visualization]
-    #set text(10pt)
-    OpenGL visualization of the n-body problem in C++ utilizing the Barnes-Hut algorithm to compute interactions between bodies. Wrote performant C++ able to compute and visualize over 25,000 bodies while maintaining a stable 30fps.
+  rows: (70pt, 54pt),
+  gutter: 6pt,
+  card(project("N-Body-simulation")[OpenGL N-Body Problem Visualization])[
+    OpenGL visualization of the n-body problem in C++ utilizing the Barnes-Hut algorithm to compute interactions between bodies.
   ],
-  [
-    #project("task-manager")[Task Manager]
-    #set text(10pt)
+  card(project("task-manager")[Task Manager])[
     A task management application, written to learn Typescript and web development. Utilizes frameworks such as Next.js, tRPC, Prisma, Tailwind and Zod.
   ],
-  [
-    #project("labee")[Labee]
-    #set text(10pt)
+  card(project("labee")[Labee])[
     A file labeling tool written in go, utilizing sqlite to manage files via labels/tags.
   ],
-  [
-    #project("gungus")[Gungus]
-    #set text(10pt)
+  card(project("gungus")[Gungus])[
     A discord bot, written in go, which (currently) allows creation of polls, achieving persistence via sqlite.
   ],
 )]
